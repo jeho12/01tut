@@ -23,6 +23,11 @@ const Content = () => {
       const handleCheck = (id) => {
         const listItems = items.map((item) => item.id === id ? { ...item, checked: !item.checked } : item);
         setItems(listItems);
+        localStorage.setItem('SHoppinglist', JSON.stringify(listItems));
+      }
+
+      const hnadleDelete = (id) => {
+        console.log(id) 
       }
     // const [count, setCount] = useState(0);
     // const name = "Jeho"
@@ -62,8 +67,12 @@ const Content = () => {
                     onChange={() => handleCheck(item.id)}
                     checked = {item.checked}
                     />
-                    <label htmlFor="">{item.item}</label>
+                    <label 
+                    style={(item.checked) ? {textDecoration: 'line-through'} : null}
+                        onDoubleClick={() => handleCheck(item.id)}
+                    >{item.item}</label>
                     <FaTrashAlt 
+                    onClick={() => handleDelete(item.id)}
                         role="button" 
                         tabIndex="0" 
                      />
